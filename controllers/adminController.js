@@ -1,11 +1,41 @@
 const db = require('../models') 
 const Restaurant = db.Restaurant
+const User = db.User
 const fs = require('fs')
 
 const imgur = require('imgur-node-api')
 const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 
 let adminController = {
+  getUsers: (req, res) => {
+    return User.findAll({
+      raw: true
+    })
+    .then(users => {
+      return res.render('admin/restaurants', {users})
+    })
+  },
+
+  toggleAdmin:  (req, res) => {
+    return User.findByPk(req.params.id)
+      .then((user) => {
+        if(user.isAdmin){
+          user.update({ isAdmin: 0 })
+          .then(() => {
+            req.flash('success_messages', 'success: admin change to user')
+            res.redirect('/admin/users')
+        })
+        } else {
+          user.update({ isAdmin: 1 })
+          .then(() => {
+            req.flash('success_messages', 'success: user change to admin')
+            res.redirect('/admin/users')
+          })
+        }
+      })
+  
+  },
+
   getRestaurants: (req, res) => {
     return Restaurant.findAll({
       raw: true
