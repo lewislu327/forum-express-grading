@@ -8,7 +8,7 @@ const upload = multer({ dest: 'temp/' })
 
 module.exports = (app, passport) => {
   const authenticated = (req, res , next) => {
-    if (helpers.isAuthenticated(req)){
+    if (helpers.ensureAuthenticated(req)){
       return next()
     }
     res.redirect('/signin')
