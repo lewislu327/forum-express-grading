@@ -14,7 +14,7 @@ const passport = require('./config/passport')
 const methodOverride = require('method-override')
 const port = process.env.PORT || 3000
 
-app.engine('handlebars', handlebars({defaultLayout: 'main', helpers: multihelpers},))
+app.engine('handlebars', handlebars({defaultLayout: 'main', helpers: require('./config/handlebars-helpers')},))
 app.set('view engine', 'handlebars')
 app.use(express.urlencoded({ extended:true }))
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }))
