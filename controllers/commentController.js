@@ -3,7 +3,6 @@ const Comment = db.Comment
 
 const commentController = {
   postComment: (req, res) => {
-    console.log(req.body)
     return Comment.create({
       text: req.body.text,
       RestaurantId: req.body.restaurantId,
