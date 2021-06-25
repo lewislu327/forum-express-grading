@@ -8,7 +8,7 @@ module.exports = {
         ({
           text: faker.lorem.sentence(),
           UserId: '5',
-          RestaurantId: '6'+ i +'5',
+          RestaurantId: '1'+ i +'5',
           createdAt: new Date(),
           updatedAt: new Date()
         })
@@ -19,7 +19,7 @@ module.exports = {
         ({
           text: faker.lorem.sentence(),
           UserId: '15',
-          RestaurantId: '5'+ i +'5',
+          RestaurantId: '2'+ i +'5',
           createdAt: new Date(),
           updatedAt: new Date()
         })
