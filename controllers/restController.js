@@ -102,7 +102,7 @@ const restController = {
       Comment,
     ]})
       .then( restaurant => {
-        return res.render('dashboard', {restaurant: restaurant.toJSON(), comments: restaurant.comment})
+        return res.render('dashboard', {restaurant: restaurant.toJSON(),})
       }) 
   } 
 
