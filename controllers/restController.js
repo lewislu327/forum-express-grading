@@ -56,12 +56,19 @@ const restController = {
   },
 
   getRestaurant: (req, res) => {
+    
     return Restaurant.findByPk(req.params.id, { include: [
       Category,
       { model: Comment, include: [User] }
     ]})
       .then( restaurant => {
-        return res.render('restaurant', { restaurant: restaurant.toJSON() })
+        let viewCounts = restaurant.viewCounts = 0 ? 0 : restaurant.viewCounts
+        viewCounts++
+        restaurant.update({ viewCounts: viewCounts })
+          .then((restaurant) => {     
+            return res.render('restaurant', { restaurant: restaurant.toJSON() })
+          })
+        // 
       }) 
   },
 
@@ -87,7 +94,18 @@ const restController = {
         comments: comments
       })
     })
-  }
+  },
+
+  getDashboard: (req, res) => {
+    return Restaurant.findByPk(req.params.id, { include: [
+      Category,
+      Comment,
+    ]})
+      .then( restaurant => {
+        return res.render('dashboard', {restaurant: restaurant.toJSON(), comments: restaurant.comment})
+      }) 
+  } 
+
 }
 
 module.exports = restController

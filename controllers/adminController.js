@@ -2,6 +2,7 @@ const db = require('../models')
 const Restaurant = db.Restaurant
 const User = db.User
 const Category = db.Category
+const Comment = db.Comment
 const fs = require('fs')
 
 const imgur = require('imgur-node-api')
@@ -157,7 +158,8 @@ let adminController = {
             res.redirect('/admin/restaurants')
           })
       })
-  }
+  },
+
 }
 
 module.exports = adminController
