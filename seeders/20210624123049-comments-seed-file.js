@@ -4,22 +4,22 @@ const faker = require('faker')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Comments',
-      Array.from({ length: 20 }).map((d, i) =>
+      Array.from({ length: 10 }).map((d, i) =>
         ({
           text: faker.lorem.sentence(),
           UserId: '5',
-          RestaurantId: Math.floor(Math.random()*(254-204+1))+204,
+          RestaurantId: '6'+ i +'5',
           createdAt: new Date(),
           updatedAt: new Date()
         })
       ), {},    
     ),
     await queryInterface.bulkInsert('Comments',
-      Array.from({ length: 20 }).map((d, i) =>
+      Array.from({ length: 10 }).map((d, i) =>
         ({
           text: faker.lorem.sentence(),
           UserId: '15',
-          RestaurantId: Math.floor(Math.random()*(254-204+1))+204,
+          RestaurantId: '5'+ i +'5',
           createdAt: new Date(),
           updatedAt: new Date()
         })
