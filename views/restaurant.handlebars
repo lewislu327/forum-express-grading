@@ -15,6 +15,9 @@
   </div>
   <div class="col-md-8">
     <p>{{restaurant.description}}</p>
+    {{#if user.isAdmin}}
+    <a class="btn btn-primary" href="/admin/restaurants/dashboard/{{restaurant.id}}" role="button">Dashboard</a>
+    {{/if}}
   </div>
   <hr>
 </div>

@@ -2,6 +2,7 @@ const db = require('../models')
 const Restaurant = db.Restaurant
 const User = db.User
 const Category = db.Category
+const Comment = db.Comment
 const fs = require('fs')
 
 const imgur = require('imgur-node-api')
@@ -157,7 +158,19 @@ let adminController = {
             res.redirect('/admin/restaurants')
           })
       })
-  }
+  },
+
+  getDashboard: (req, res) => {
+    return Restaurant.findByPk(req.params.id, { include: [
+      Category,
+      Comment,
+    ]})
+      .then( restaurant => {
+        console.log(restaurant)
+
+        return res.render('admin/dashboard', {restaurant: restaurant.toJSON(), comments: restaurant.comment})
+      }) 
+  } 
 }
 
 module.exports = adminController
