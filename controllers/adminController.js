@@ -160,17 +160,6 @@ let adminController = {
       })
   },
 
-  getDashboard: (req, res) => {
-    return Restaurant.findByPk(req.params.id, { include: [
-      Category,
-      Comment,
-    ]})
-      .then( restaurant => {
-        console.log(restaurant)
-
-        return res.render('admin/dashboard', {restaurant: restaurant.toJSON(), comments: restaurant.comment})
-      }) 
-  } 
 }
 
 module.exports = adminController
