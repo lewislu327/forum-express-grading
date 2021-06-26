@@ -3,6 +3,7 @@ const Restaurant = db.Restaurant
 const Category = db.Category
 const Comment = db.Comment
 const User = db.User
+const helpers = require('../_helpers')
 
 const pageLimit = 10
 
@@ -67,8 +68,8 @@ const restController = {
     ]})
       .then( restaurant => {
         let viewCounts = restaurant.viewCounts = 0 ? 0 : restaurant.viewCounts
-        const isFavorited = restaurant.FavoritedUsers.map(d => d.id).includes(req.user.id)
-        const isLiked = restaurant.LikedUsers.map(d => d.id).includes(req.user.id)
+        const isFavorited = restaurant.FavoritedUsers.map(d => d.id).includes(helpers.getUser(req).id)
+        const isLiked = restaurant.LikedUsers.map(d => d.id).includes(helpers.getUser(req).id)
         viewCounts++
         restaurant.update({ viewCounts: viewCounts })
           .then((restaurant) => {     
