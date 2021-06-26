@@ -30,12 +30,12 @@
       <p>
       <div class="container d-flex justify-content-center">
         <a href="/restaurants/{{this.id}}"><button class="btn btn-primary">Show</button></a>
-        {{!-- {{#if this.isFavorited }} --}}
+        {{#if this.isFavorited }}
         <form action="/favorite/{{this.id}}?_method=DELETE" method="POST"><button type="submit"
             class="btn btn-danger">移除最愛</button></form>
-        {{!-- {{else}} --}}
+        {{else}}
         <form action="/favorite/{{this.id}}" method="POST"><button type="submit" class="btn btn-primary">加到最愛</button></form>
-        {{!-- {{/if}} --}}
+        {{/if}}
       </div>
       </p>
     </div>
