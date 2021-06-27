@@ -5,20 +5,22 @@
   <div class="col-md-8">
     <h2>{{user.name}}</h2>
     <p>{{user.email}}</p>
-    <p><strong>{{comments.length}}</strong>已評論餐廳</p>
-    <p><strong>{{user.FavoritedRestaurants.length}}</strong>收藏的餐廳</p>
-    <p><strong>{{user.Followings.length}}</strong>followings</p>
-    <p><strong>{{user.Followers.length}}</strong>followers</p>
+    <p><strong>{{Comments.length}}</strong>已評論餐廳</p>
+    <p><strong>{{FavoritedRestaurants.length}}</strong>收藏的餐廳</p>
+    <p><strong>{{Followings.length}}</strong>followings</p>
+    <p><strong>{{Followers.length}}</strong>followers</p>
+    {{#ifCond user.id myId}}
     <button type="button" class="btn btn-link">
       <a href="/users/{{user.id}}/edit">
         Edit
       </a>
     </button>
+    {{/ifCond}}
   </div> 
 </div>
 <div class="row">
   <div class="col-md-4 mt-3">
-    <h4>{{comments.length}}已評論餐廳</h4>
+    <h4>{{Comments.length}}已評論餐廳</h4>
     <div class="row">
       {{#each comments}}
       <div class="card mx-3 my-2" style="width: 8rem;">
@@ -29,7 +31,7 @@
     </div>
   </div>
   <div class="col-md-6 mt-3">
-    <h4>{{user.FavoritedRestaurants.length}}收藏的餐廳</h4>
+    <h4>{{FavoritedRestaurants.length}}收藏的餐廳</h4>
     <div class="row">
     {{#each FavoritedRestaurants}}
       <div class="card mx-3 my-2" style="width: 8rem;">

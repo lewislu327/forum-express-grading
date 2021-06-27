@@ -65,8 +65,9 @@ const userController = {
     })
     .then( user => {
       res.render('user_profile', {
+        myId: req.user.id,
         user: user.toJSON(), 
-        comments: user.Comments, 
+        Comments: user.Comments, 
         FavoritedRestaurants: user.FavoritedRestaurants,
         Followers: user.Followers,
         Followings: user.Followings
