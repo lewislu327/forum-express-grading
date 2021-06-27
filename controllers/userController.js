@@ -64,8 +64,6 @@ const userController = {
       ]
     })
     .then( user => {
-      console.log(user)
-  
       res.render('user_profile', {
         user: user.toJSON(), 
         comments: user.Comments, 
@@ -94,7 +92,10 @@ const userController = {
       imgur.upload(file.path, (err, img) => {
           return User.findByPk(req.params.id, {
             include: [
-              { model: Comment, include: [Restaurant] }
+              { model: Comment, include: [Restaurant] },
+              { model: Restaurant, as: 'FavoritedRestaurants' },
+              { model: User, as: 'Followers' },
+              { model: User, as: 'Followings' },
             ]
           })
             .then((user) => {
@@ -102,21 +103,36 @@ const userController = {
                 name: req.body.name,
                 image: file ? img.data.link : null,
               }).then((user) => {
-                res.render('user_profile', {user: user.toJSON(), comments: user.Comments})
+                res.render('user_profile', {
+                  user: user.toJSON(), 
+                  comments: user.Comments, 
+                  FavoritedRestaurants: user.FavoritedRestaurants,
+                  Followers: user.Followers,
+                  Followings: user.Followings
+                })
               })
             })
       })
     } else {
       return User.findByPk(req.params.id, {
         include: [
-           { model: Comment, include: [Restaurant] }
+          { model: Comment, include: [Restaurant] },
+          { model: Restaurant, as: 'FavoritedRestaurants' },
+          { model: User, as: 'Followers' },
+          { model: User, as: 'Followings' },
         ]
       })
         .then((user) => {
           user.update({
             name: req.body.name,
           }).then((user) => {
-            res.render('user_profile', {user: user.toJSON(), comments: user.Comments })
+            res.render('user_profile', {
+              user: user.toJSON(), 
+              comments: user.Comments, 
+              FavoritedRestaurants: user.FavoritedRestaurants,
+              Followers: user.Followers,
+              Followings: user.Followings
+            })
           })
         })
     }
@@ -195,7 +211,7 @@ const userController = {
   removeFollowing: (req, res) => {
     return Followship.findOne({
       where : {
-        followerId: req.user.id,
+        followerId: helpers.getUser(req).id,
         followingId: req.params.userId
       }
     })
