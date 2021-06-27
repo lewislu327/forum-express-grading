@@ -15,62 +15,56 @@
       </a>
     </button>
   </div> 
- 
-
 </div>
-<div class="container mt-3">
-  <h4>{{comments.length}}已評論餐廳</h4>
-  <div class="row justify-content-center">
-    {{#each comments}}
-    <div class="card mx-3 my-2" style="width: 11rem;">
-      <a href="/restaurants/{{this.Restaurant.id}}"><img class="card-img-top" src="{{this.Restaurant.image}}" alt="Card image cap"></a>
-      <div class="card-body">
-        <h5 class="card-title">{{this.Restaurant.name}}</h5>
+<div class="row">
+  <div class="col-md-4 mt-3">
+    <h4>{{comments.length}}已評論餐廳</h4>
+    <div class="row">
+      {{#each comments}}
+      <div class="card mx-3 my-2" style="width: 8rem;">
+        <a href="/restaurants/{{this.Restaurant.id}}"><img class="card-img-top" src="{{this.Restaurant.image}}"
+            alt="Card image cap"></a>
       </div>
+      {{/each}}
     </div>
-    {{/each}}
   </div>
-</div>
-
-<div class="container mt-3">
-  <h4>{{user.FavoritedRestaurants.length}}收藏的餐廳</h4>
-  <div class="row justify-content-center">
+  <div class="col-md-6 mt-3">
+    <h4>{{user.FavoritedRestaurants.length}}收藏的餐廳</h4>
+    <div class="row">
     {{#each FavoritedRestaurants}}
-    <div class="card mx-3 my-2" style="width: 11rem;">
-      <a href="/restaurants/{{this.id}}"><img class="card-img-top" src="{{this.image}}"
-          alt="Card image cap"></a>
-      <div class="card-body">
-        <h5 class="card-title">{{this.name}}</h5>
+      <div class="card mx-3 my-2" style="width: 8rem;">
+        <a href="/restaurants/{{this.id}}"><img class="card-img-top" src="{{this.image}}" alt="Card image cap"></a>
+        <P class="card-title">{{this.name}}</P>
       </div>
-    </div>
     {{/each}}
+  </div>
   </div>
 </div>
 
-<div class="container mt-3">
-  <h4>{{user.Followings.length}}位Followings</h4>
-  <div class="row justify-content-center">
-    {{#each Followings}}
-    <div class="card mx-3 my-2" style="width: 11rem;">
-      <img class="card-img-top" src="{{this.image}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{this.name}}</h5>
+
+<div class="row">
+  <div class="col-md-4 mt-3">
+    <h4>{{user.Followings.length}}位Followings</h4>
+    <div class="row">
+      {{#each Followings}}
+      </a>
+      <div class="card mx-3 my-2" style="width: 5rem;">
+      <a href="/users/{{this.id}}"><img class="card-img-top" src="{{this.image}}" alt="Card image cap"></a>
       </div>
+      {{/each}}
     </div>
-    {{/each}}
+  </div>
+  
+  <div class="col-md-8 mt-3">
+    <h4>{{user.Followers.length}}位Followers</h4>
+    <div class="row justify-content-center">
+      {{#each Followers}}
+      <div class="card mx-3 my-2" style="width: 5rem;">
+        <a href="/users/{{this.id}}"><img class="card-img-top" src="{{this.image}}" alt="Card image cap"></a>
+      </div>
+      {{/each}}
+    </div>
   </div>
 </div>
 
-<div class="container mt-3">
-  <h4>{{user.Followers.length}}位Followers</h4>
-  <div class="row justify-content-center">
-    {{#each Followers}}
-    <div class="card mx-3 my-2" style="width: 11rem;">
-      <img class="card-img-top" src="{{this.image}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{this.name}}</h5>
-      </div>
-    </div>
-    {{/each}}
-  </div>
-</div>
+
