@@ -121,12 +121,9 @@ const restController = {
   
    getTopRestaurants: (req, res) => {
    return Restaurant.findAll({
-      
         include: [{ model: User, as: 'FavoritedUsers' },]
       })
-    
     .then((restaurants) => {
-      // console.log(restaurants)
       restaurants = restaurants.map( restaurant => ({
         ...restaurant.dataValues,
         description: restaurant.description.substring(0, 50),

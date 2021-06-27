@@ -57,12 +57,23 @@ const userController = {
   getUser: (req, res) => {
     User.findByPk(req.params.id, {
       include: [
-        { model: Comment, include: [Restaurant] }
+        { model: Comment, include: [Restaurant] },
+        { model: Restaurant, as: 'FavoritedRestaurants' },
+        { model: User, as: 'Followers' },
+        { model: User, as: 'Followings' },
       ]
     })
-      .then( user => {
-        res.render('user_profile', {user: user.toJSON(), comments: user.Comments})
+    .then( user => {
+      console.log(user)
+  
+      res.render('user_profile', {
+        user: user.toJSON(), 
+        comments: user.Comments, 
+        FavoritedRestaurants: user.FavoritedRestaurants,
+        Followers: user.Followers,
+        Followings: user.Followings
       })
+    })
   },
 
    editUser: (req, res) => {
@@ -134,7 +145,7 @@ const userController = {
 
   addLike: (req, res) => {
     return Like.create({
-      UserId: req.user.id,
+      UserId: helpers.getUser(req).id,
       RestaurantId: req.params.restaurantId
     })
       .then((restaurant) => {
@@ -144,7 +155,7 @@ const userController = {
   removeLike: (req, res) => {
     return Like.findOne({
       where: {
-        UserId: req.user.id,
+        UserId: helpers.getUser(req).id,
         RestaurantId: req.params.restaurantId
       }
     })
@@ -166,7 +177,7 @@ const userController = {
       users = users.map(user => ({
         ...user.dataValues,
         FollowerCount: user.Followers.length,
-        isFollowed: req.user.Followings.map(d => d.id).includes(user.id)
+        isFollowed: helpers.getUser(req).Followings.map(d => d.id).includes(user.id)
       }))
       users = users.sort((a, b) => b.FollowerCount - a.FollowerCount)
       return res.render('topUser', { users: users })
@@ -175,7 +186,7 @@ const userController = {
 
   addFollowing: (req, res) => {
     return Followship.create({
-      followerId: req.user.id, //user himself
+      followerId: helpers.getUser(req).id, //user himself
       followingId: req.params.userId // the guy you want to follow
     })
     .then( followship => { return res.redirect('back') })
