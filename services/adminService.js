@@ -8,7 +8,7 @@ const fs = require('fs')
 const imgur = require('imgur-node-api')
 const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 
-const  adminService = {
+const adminService = {
   getRestaurants: (req, res, callback) => {
     return Restaurant.findAll({raw: true, nest: true,
       include: [Category]
