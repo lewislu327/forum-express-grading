@@ -11,11 +11,8 @@ const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 
 let adminController = {
   getUsers: (req, res) => {
-    return User.findAll({
-      raw: true
-    })
-    .then(users => {
-      return res.render('admin/restaurants', {users})
+    adminService.getUsers(req, res, (data) => {
+      return res.render('admin/restaurants', data)
     })
   },
 

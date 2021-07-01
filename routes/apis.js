@@ -23,7 +23,7 @@ const authenticatedAdmin = (req, res, next) => {
 
 router.post('/signin', userController.signIn)
 router.post('/signup', userController.signUp)
-
+router.get('/admin/users', authenticated, authenticatedAdmin, adminController.getUsers)
 router.get('/admin/restaurants',  authenticated, authenticatedAdmin, adminController.getRestaurants)
 router.get('/admin/restaurants/:id', adminController.getRestaurant)
 router.post('/admin/restaurants/', upload.single('image'), adminController.postRestaurant)
