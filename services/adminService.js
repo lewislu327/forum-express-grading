@@ -27,7 +27,7 @@ const adminService = {
 
   getRestaurant: (req, res, callback) => {
     return Restaurant.findByPk(req.params.id, { include: [Category] })
-      .then(restaurant => { callback ({ restaurant: restaurant.toJSON() })})
+      .then(restaurant => { callback ({ restaurant: restaurant })})
   },
 
   deleteRestaurant: (req, res, callback) => {
@@ -74,6 +74,16 @@ const adminService = {
         callback({ status: 'success', message: 'restaurant was successfully created' })
       })
     }
+  },
+
+  editRestaurant: (req, res, callback) => {
+    Category.findAll({raw: true, nest: true})
+    .then( categories => {
+    return Restaurant.findByPk(req.params.id)
+      .then(restaurant => {
+        callback({ restaurant: restaurant, categories })
+      })
+    })
   },
 
   putRestaurant: (req, res, callback) => {
