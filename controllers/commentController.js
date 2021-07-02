@@ -1,25 +1,19 @@
-const db = require('../models')
-const Comment = db.Comment
+const db = require("../models");
+const Comment = db.Comment;
+const commentService = require("../services/commentService.js");
 
 const commentController = {
   postComment: (req, res) => {
-    return Comment.create({
-      text: req.body.text,
-      RestaurantId: req.body.restaurantId,
-      UserId: req.user.id
-    })
-    .then( comment => {
-      res.redirect(`/restaurants/${req.body.restaurantId}`)
-    })
+    commentService.postComment(req, res, (data) => {
+      res.redirect(`/restaurants/${data.RestaurantId}`);
+    });
   },
 
   deleteComment: (req, res) => {
-    return Comment.findByPk(req.params.id)
-      .then( comment => {
-        comment.destroy()
-          .then( comment => res.redirect(`/restaurants/${comment.RestaurantId}`))
-      })
-  }
-}
+    commentService.deleteComment(req, res, (data) => {
+      res.redirect(`/restaurants/${data.RestaurantId}`);
+    });
+  },
+};
 
-module.exports = commentController
+module.exports = commentController;
