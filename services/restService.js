@@ -1,10 +1,5 @@
-const db = require("../models");
-const Restaurant = db.Restaurant;
-const Category = db.Category;
-const Comment = db.Comment;
-const User = db.User;
+const { Restaurant, Category, Comment, User, Favorite } = require("../models");
 const helpers = require("../_helpers");
-const Favorite = db.Favorite;
 const pageLimit = 10;
 
 let restService = {
@@ -64,7 +59,9 @@ let restService = {
         { model: User, as: "LikedUsers" },
       ],
     }).then((restaurant) => {
-      const isFavorited = restaurant.FavoritedUsers.map((d) => d.id).includes(helpers.getUser(req).id);
+      const isFavorited = restaurant.FavoritedUsers.map((d) => d.id).includes(
+        helpers.getUser(req).id
+      );
       const isLiked = restaurant.LikedUsers.map((d) => d.id).includes(helpers.getUser(req).id);
       restaurant.increment("viewCounts", { by: 1 });
       return callback({
@@ -121,6 +118,38 @@ let restService = {
       restaurants = restaurants.slice(0, 10);
       return callback({
         restaurants: restaurants,
+      });
+    });
+  },
+
+  getRandomRestaurant: async (req, res, callback) => {
+    const restaurants = await Restaurant.findAll({ raw: true, nest: true });
+    const restaurantId = restaurants.map((d) => d.id);
+
+    let min = restaurantId[0];
+    let max = restaurantId.pop();
+
+    function getRandom(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    const randomId = getRandom(min, max);
+    console.log(randomId);
+    return Restaurant.findByPk(randomId, {
+      include: [
+        Category,
+        { model: Comment, include: [User] },
+        { model: User, as: "FavoritedUsers" },
+        { model: User, as: "LikedUsers" },
+      ],
+    }).then((restaurant) => {
+      const isFavorited = restaurant.FavoritedUsers.map((d) => d.id).includes(req.user.id);
+      const isLiked = restaurant.LikedUsers.map((d) => d.id).includes(helpers.getUser(req).id);
+      restaurant.increment("viewCounts", { by: 1 });
+      return callback({
+        isFavorited,
+        isLiked,
+        restaurant: restaurant.toJSON(),
       });
     });
   },
