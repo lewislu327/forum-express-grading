@@ -1,54 +1,88 @@
-# README
+# Restaurant forum Web App
 
-## 初始化
-### Initialize
+#### A simple web application build from Node.js & Express
+
+[<img align="center" src="" height="400" width="800" />]()
+
+##### Example User Information
+
+| Email             | Password | Role  |
+| ----------------- | :------: | :---: |
+| user1@example.com | 12345678 | User  |
+| admin@example.com | 12345678 | Admin |
+
+[網站連結](https://dry-river-17649.herokuapp.com/)
+
+# Project Running Environment
+
+- Node.js: v14.17.4
+- Express: v4.17.1
+- Express-handlebars v5.3.0
+- Handlebars-helpers: v0.11.0
+- bcryptjs: v2.4.3
+- connect-flash: v0.1.1
+- dotenv: v10.0.0
+- express-session: v1.17.2
+- faker: v5.5.3
+- handlebars-helpers: v0.10.0
+- imgur-node-api: v0.1.0
+- jsonwebtoken: v8.5.1
+- method-override: v3.0.0
+- mocha: v8.2.0
+- moment: v2.29.1
+- multer: v1.4.2
+- mysql2: v2.2.5
+- passport: v0.4.1
+- passport-jwt: v4.0.0
+- passport-local: v1.0.0
+- pg: v8.6.0
+- sequelize: v6.3.5
+- sequelize-cli: v6.2.0
+- supertest: v5.0.0
+
+## Main Feature
+
+- Admin can create new restaurant
+- Admin can assign role to user
+- Admin can mange comments
+- User can add restaurants to favorites
+- User can leave comments on restaurant page
+- User can see other users latest activities
+- User can use random select function to choose one restaurant
+- Restaurants can be group by category
+
+## Installation & Execution
+
+1. Clone this project into you folder
+
 ```
-git clone https://github.com/your_github_name/forum-express-2020
-cd forum-express
-git remote add upstream https://github.com/ALPHACamp/forum-express-2020.git  # 建立上游連線
-npm install
+   $ git clone https://github.com/lewislu327/restaurant-forum-express
 ```
 
-### 設定資料庫
-需要與 config/config.json 一致
+2. cd to project folder
 
 ```
-create database forum;
-create database forum_test;
+   cd restaurant-forum-express
 ```
 
-### 切換環境
+3. Install npm Express & Handlebars
 
 ```
-export NODE_ENV=test   # 切換到測試環境，如果在等號後加其他的字串，則會切到其他的環境
-echo $NODE_ENV         # 印出目前使用的環境
+   $ npm install
 ```
 
-### 執行測試
-```
-npm run test
-```
-
-## 下載作業規格
-以 A17 為例
+4. Run this app
 
 ```
-git checkout -b A17           # 開新分支
-git merge origin/A17-test     # 下載作業規格
-npm run test                  # 直到綠燈全亮
-
-git add .
-git commit -m "...."
+   $ npm run dev
 ```
 
-## 繳交作業
+5. If terminal shows below content means it's working
 
 ```
-git push origin A17           # 上傳本地進度
+   Express is listening on http://localhost:3000
 ```
 
-接著改成到 GitHub 來發 PR。
+## Contributor
 
-## 共用帳號
-請一律設定一個共用的 root user
-root@example.com，登入密碼 12345678
+Lewis Lu
