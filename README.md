@@ -2,7 +2,10 @@
 
 #### A simple web application build from Node.js & Express
 
-[<img align="center" src="" height="400" width="800" />]()
+[<img align="center" src="https://github.com/lewislu327/restaurant-forum-express/blob/master/public/images/login.png" height="400" width="800" />]()
+[<img align="center" src="https://github.com/lewislu327/restaurant-forum-express/blob/master/public/images/homepage.png" height="400" width="800" />]()
+[<img align="center" src="https://github.com/lewislu327/restaurant-forum-express/blob/master/public/images/comment_page.png" height="400" width="800" />]()
+[<img align="center" src="https://github.com/lewislu327/restaurant-forum-express/blob/master/public/images/admin_page.png" height="400" width="800" />]()
 
 ##### Example User Information
 
@@ -12,6 +15,17 @@
 | admin@example.com | 12345678 | Admin |
 
 [網站連結](https://dry-river-17649.herokuapp.com/)
+
+## Main Feature
+
+- Admin can create new restaurant
+- Admin can assign role to user
+- Admin can mange comments
+- User can add restaurants to favorites
+- User can leave comments on restaurant page
+- User can see other users latest activities
+- User can use random select function to choose one restaurant
+- Restaurants can be group by category
 
 # Project Running Environment
 
@@ -39,17 +53,6 @@
 - sequelize: v6.3.5
 - sequelize-cli: v6.2.0
 - supertest: v5.0.0
-
-## Main Feature
-
-- Admin can create new restaurant
-- Admin can assign role to user
-- Admin can mange comments
-- User can add restaurants to favorites
-- User can leave comments on restaurant page
-- User can see other users latest activities
-- User can use random select function to choose one restaurant
-- Restaurants can be group by category
 
 ## Installation & Execution
 
